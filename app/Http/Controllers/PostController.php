@@ -4,57 +4,58 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class PostController extends Controller
 {
     //
     public function index() {
 
-      //  $posts = Post::all();
-        $posts = Post::get();
+        $posts = Post::all();
 
-        foreach ($posts as $post) {
-            dump($post->id, $post->title);
-        }
+        return view('post.index', compact('posts'));
 
-        return 'PostController';
+
+
+//        foreach ($posts as $post) {
+//            dump($post->id, $post->title);
+//        }
+//
+//        return 'PostController';
     }
 
     public function create() {
 
-        $posts_arr = [
-            [
-                'title' => 'test title 2',
-                'content' => 'test content 2',
-                'image' => ' test image 2',
-                'likes' => 2,
-                'is_published' => 1,
-                '' => '',
-            ],
-            [
-                'title' => 'test title 3',
-                'content' => 'test content 3',
-                'image' => ' test image 3',
-                'likes' => 3,
-                'is_published' => 1,
-                '' => '',
-            ],
-            [
-                'title' => 'test title 4',
-                'content' => 'test content 4',
-                'image' => ' test image 5',
-                'likes' => 6,
-                'is_published' => 1,
-                '' => '',
-            ]
-        ];
+        return view('post.create');
 
-        foreach ($posts_arr as $post) {
-            Post::create($post);
-        }
-
-        dump('created');
     }
+
+    public function store() {
+
+
+        $data = request()->validate([
+            'title' => 'string',
+            'content' => 'string',
+            'image' => 'string',
+            'likes' => 'integer',
+        ]);
+
+        Post::create($data);
+
+        return redirect()->route('posts.index');
+
+        //return view('post.create');
+
+    }
+
+    public function show(Post $post) {
+
+        return view('post.show', compact('post'));
+
+    }
+
+
+
 
     public function update() {
 
