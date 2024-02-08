@@ -2,23 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 
 class PostController extends Controller
 {
 
-    public function index() {
+    public function index()
+    {
+//        $category = Category::find(1);
+//        dd($category->posts);
+
 
         $posts = Post::all();
-
         return view('post.index', compact('posts'));
     }
 
-    public function create() {
+    public function create()
+    {
         return view('post.create');
     }
 
-    public function store() {
+    public function store()
+    {
         $data = request()->validate([
             'title' => 'string',
             'content' => 'string',
@@ -31,19 +37,22 @@ class PostController extends Controller
 
     }
 
-    public function show(Post $post) {
-      //  $post = Post::find($id);
+    public function show(Post $post)
+    {
+        //  $post = Post::find($id);
         return view('post.show', compact('post'));
     }
 
 
-    public function edit(Post $post) {
+    public function edit(Post $post)
+    {
         //$post = Post::find($id);
         return view('post.edit', compact('post'));
     }
 
 
-    public function update($id) {
+    public function update($id)
+    {
 
         $data = request()->validate([
             'title' => 'string',
@@ -54,19 +63,20 @@ class PostController extends Controller
 
         $post = Post::find($id);
 
-        $post->update( $data );
+        $post->update($data);
 
         return redirect()->route('posts.show', $id);
     }
 
-    public function destroy(Post $post) {
+    public function destroy(Post $post)
+    {
         $post->delete();
         return redirect()->route('posts.index');
     }
 
 
-
-    public function firstOrCreate() {
+    public function firstOrCreate()
+    {
 
         $post = Post::firstOrCreate([
             'title' => '5555566'
@@ -82,7 +92,8 @@ class PostController extends Controller
         dd($post->content);
     }
 
-    public function updateOrCreate() {
+    public function updateOrCreate()
+    {
 
         $post = Post::updateOrCreate([
             'title' => '000000000'
