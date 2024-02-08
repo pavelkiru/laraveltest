@@ -3,36 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class PostController extends Controller
 {
-    //
+
     public function index() {
 
         $posts = Post::all();
 
         return view('post.index', compact('posts'));
-
-
-
-//        foreach ($posts as $post) {
-//            dump($post->id, $post->title);
-//        }
-//
-//        return 'PostController';
     }
 
     public function create() {
-
         return view('post.create');
-
     }
 
     public function store() {
-
-
         $data = request()->validate([
             'title' => 'string',
             'content' => 'string',
@@ -41,45 +27,41 @@ class PostController extends Controller
         ]);
 
         Post::create($data);
-
         return redirect()->route('posts.index');
-
-        //return view('post.create');
 
     }
 
     public function show(Post $post) {
-
+      //  $post = Post::find($id);
         return view('post.show', compact('post'));
-
     }
 
 
+    public function edit(Post $post) {
+        //$post = Post::find($id);
+        return view('post.edit', compact('post'));
+    }
 
 
-    public function update() {
+    public function update($id) {
 
-        $post = Post::find(5);
-        dump($post);
-
-
-
-        $post->update([
-           'title' => 'updated title'
+        $data = request()->validate([
+            'title' => 'string',
+            'content' => 'string',
+            'image' => 'string',
+            'likes' => 'integer',
         ]);
 
-        $post2 = Post::find(5);
-        dump($post2);
+        $post = Post::find($id);
+
+        $post->update( $data );
+
+        return redirect()->route('posts.show', $id);
     }
 
-    public function delete() {
-       // findOrFail
-
-        $post = Post::findOrFail(7);
-
+    public function destroy(Post $post) {
         $post->delete();
-
-        dump('deleted');
+        return redirect()->route('posts.index');
     }
 
 

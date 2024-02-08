@@ -20,9 +20,24 @@
                 <th scope="row">{{ $post->id }}</th>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->content }}</td>
-                <td>{{ $post->image }}</td>
+                <td>
+                    <img src="{{ $post->image }}" alt="">
+                </td>
                 <td>{{ $post->likes }}</td>
-                <td><a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">Show</a></td>
+                <td>
+                    <div class="d-flex">
+                        <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary me-1">Show</a>
+                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary me-1">Edit</a>
+
+
+                        <form action="{{ route('posts.delete', $post->id)}}" method="post">
+                            @method('delete')
+                            @csrf
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </td>
+
             </tr>
         @endforeach
 

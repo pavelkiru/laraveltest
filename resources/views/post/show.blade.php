@@ -9,5 +9,7 @@
 
 
 </div>
-
+<div>
+    <a href="{{ route('posts.index') }}" class="btn btn-primary me-1">To posts</a>
+</div>
 @endsection
