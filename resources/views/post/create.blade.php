@@ -32,7 +32,7 @@
 
         <div class="mb-3">
             <label for="category" class="form-label">Category</label>
-            <select name="category" id="category">
+            <select name="category_id" id="category">
                 @foreach($all_categories as $all_cat)
                     <option value="{{ $all_cat->id }}">{{ $all_cat->title }}</option>
                 @endforeach

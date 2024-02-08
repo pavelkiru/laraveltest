@@ -30,14 +30,18 @@ class PostController extends Controller
             'title' => 'string',
             'content' => 'string',
             'image' => 'string',
-//            'category' => '',
-//            'tags' => '',
+            'category_id' => '',
+            'tags' => '',
             'likes' => 'integer',
         ]);
 
-     //  dd($data);
+        $tags = $data['tags'];
+        unset($data['tags']);
 
-        Post::create($data);
+
+        $post = Post::create($data);
+        $post->tags()->attach($tags);
+
         return redirect()->route('posts.index');
 
     }
@@ -60,21 +64,21 @@ class PostController extends Controller
 
     public function update($id)
     {
-
         $data = request()->validate([
             'title' => 'string',
             'content' => 'string',
             'image' => 'string',
-            'category' => '',
+            'category_id' => '',
             'tags' => '',
             'likes' => 'integer',
         ]);
 
-        dd($data);
+        $tags = $data['tags'];
+        unset($data['tags']);
 
         $post = Post::find($id);
-
         $post->update($data);
+        $post->tags()->sync($tags);
 
         return redirect()->route('posts.show', $id);
     }
