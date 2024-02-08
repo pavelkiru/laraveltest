@@ -11,24 +11,17 @@ class PostController extends Controller
 
     public function index()
     {
-        $category = Category::all();
-
-
-//        $post = Post::find(4);
-//        dd($post->tags);
-
-//        $tag = Tag::find(6);
-//        dd($tag->posts);
-
-
-
         $posts = Post::all();
-        return view('post.index', compact('posts', 'category'));
+        return view('post.index', compact('posts'));
     }
 
     public function create()
     {
-        return view('post.create');
+
+        $all_tags = Tag::all();
+        $all_categories = Category::all();
+
+        return view('post.create', compact('all_tags', 'all_categories'));
     }
 
     public function store()
@@ -37,8 +30,12 @@ class PostController extends Controller
             'title' => 'string',
             'content' => 'string',
             'image' => 'string',
+//            'category' => '',
+//            'tags' => '',
             'likes' => 'integer',
         ]);
+
+     //  dd($data);
 
         Post::create($data);
         return redirect()->route('posts.index');
@@ -47,15 +44,17 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        //  $post = Post::find($id);
         return view('post.show', compact('post'));
     }
 
 
     public function edit(Post $post)
     {
-        //$post = Post::find($id);
-        return view('post.edit', compact('post'));
+
+        $all_tags = Tag::all();
+        $all_categories = Category::all();
+
+        return view('post.edit', compact('post', 'all_tags', 'all_categories'));
     }
 
 
@@ -66,8 +65,12 @@ class PostController extends Controller
             'title' => 'string',
             'content' => 'string',
             'image' => 'string',
+            'category' => '',
+            'tags' => '',
             'likes' => 'integer',
         ]);
+
+        dd($data);
 
         $post = Post::find($id);
 

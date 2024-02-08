@@ -34,6 +34,44 @@
             @enderror
 
             <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select name="category" id="category">
+                    @foreach($all_categories as $all_cat)
+                        <option
+                            value="{{ $all_cat->id }}" {{ ($all_cat->id == $post->category->id) ? 'selected' : '' }}>
+                            {{ $all_cat->title}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            @error('category')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+
+            <div class="mb-3">
+                <label for="tags" class="form-label">Tags</label>
+                <select name="tags[]" id="tags" multiple>
+                    @foreach($all_tags as $all_tag)
+                        <option value="{{ $all_tag->id }}"
+
+                            @foreach($post->tags as $tag)
+                                @if ( $all_tag->id == $tag->id)
+                                    selected
+                                @endif
+                            @endforeach
+                        >{{ $all_tag->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            @error('tags')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+
+            <div class="mb-3">
                 <label for="likes" class="form-label">Likes</label>
                 <input type="number" class="form-control" id="likes" name="likes" value="{{$post->likes}}">
             </div>

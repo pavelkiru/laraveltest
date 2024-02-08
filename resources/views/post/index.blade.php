@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-<div>
+<div class="posts">
 
     <table class="table">
         <thead>
@@ -9,6 +9,8 @@
             <th scope="col">Title</th>
             <th scope="col">Content</th>
             <th scope="col">Image</th>
+            <th scope="col">Category</th>
+            <th scope="col">Tags</th>
             <th scope="col">Likes</th>
             <th scope="col">Actions</th>
         </tr>
@@ -21,7 +23,13 @@
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->content }}</td>
                 <td>
-                    <img src="{{ $post->image }}" alt="">
+                    <img class="post_image_preview" src="{{ $post->image }}" alt="">
+                </td>
+                <td>{{ $post->category->title }}</td>
+                <td>
+                    @foreach($post->tags as $tag)
+                        <span>{{ $tag->title }}</span>
+                    @endforeach
                 </td>
                 <td>{{ $post->likes }}</td>
                 <td>

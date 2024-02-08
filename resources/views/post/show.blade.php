@@ -5,7 +5,18 @@
     <p>{{ $post->content }}</p>
     <img src="{{$post->image}}" alt="">
     <p>{{$post->likes}}</p>
+    <div>
+        <p>Category: {{ $post->category->title }}</p>
+    </div>
 
+    <div>
+        <p>Tags</p>
+        <ol>
+            @foreach($post->tags as $tag)
+                <li>{{ $tag->title }}</li>
+            @endforeach
+        </ol>
+    </div>
 
 
 </div>
