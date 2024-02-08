@@ -4,18 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
 
     public function index()
     {
-//        $category = Category::find(1);
-//        dd($category->posts);
+        $category = Category::all();
+
+
+//        $post = Post::find(4);
+//        dd($post->tags);
+
+//        $tag = Tag::find(6);
+//        dd($tag->posts);
+
 
 
         $posts = Post::all();
-        return view('post.index', compact('posts'));
+        return view('post.index', compact('posts', 'category'));
     }
 
     public function create()
