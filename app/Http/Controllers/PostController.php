@@ -2,92 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
-use App\Models\Tag;
 
 class PostController extends Controller
 {
 
-    public function index()
-    {
-        $posts = Post::all();
-        return view('post.index', compact('posts'));
-    }
 
-    public function create()
-    {
-
-        $all_tags = Tag::all();
-        $all_categories = Category::all();
-
-        return view('post.create', compact('all_tags', 'all_categories'));
-    }
-
-    public function store()
-    {
-        $data = request()->validate([
-            'title' => 'string',
-            'content' => 'string',
-            'image' => 'string',
-            'category_id' => '',
-            'tags' => '',
-            'likes' => 'integer',
-        ]);
-
-        $tags = $data['tags'];
-        unset($data['tags']);
-
-
-        $post = Post::create($data);
-        $post->tags()->attach($tags);
-
-        return redirect()->route('posts.index');
-
-    }
-
-    public function show(Post $post)
-    {
-        return view('post.show', compact('post'));
-    }
-
-
-    public function edit(Post $post)
-    {
-
-        $all_tags = Tag::all();
-        $all_categories = Category::all();
-
-        return view('post.edit', compact('post', 'all_tags', 'all_categories'));
-    }
-
-
-    public function update($id)
-    {
-        $data = request()->validate([
-            'title' => 'string',
-            'content' => 'string',
-            'image' => 'string',
-            'category_id' => '',
-            'tags' => '',
-            'likes' => 'integer',
-        ]);
-
-        $tags = $data['tags'];
-        unset($data['tags']);
-
-        $post = Post::find($id);
-        $post->update($data);
-        $post->tags()->sync($tags);
-
-        return redirect()->route('posts.show', $id);
-    }
-
-    public function destroy(Post $post)
-    {
-        $post->delete();
-        return redirect()->route('posts.index');
-    }
 
 
     public function firstOrCreate()
