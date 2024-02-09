@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Post;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Tag;
 
-class CreateController extends Controller {
+class CreateController extends BaseControllers {
 
     public function __invoke(){
         $all_tags = Tag::all();
