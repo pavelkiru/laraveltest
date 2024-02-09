@@ -1,7 +1,9 @@
 @extends('layouts.main')
 @section('content')
 <div class="posts">
-
+    <div class="create_button_wr">
+        <a href="{{ route('posts.create') }}" class="btn btn-primary">Create new post</a>
+    </div>
     <table class="table">
         <thead>
         <tr>
@@ -52,10 +54,17 @@
         </tbody>
     </table>
 
+
+
+
+    <div class="pagination">
+        {{ $posts->links() }}
+    </div>
 </div>
 
-<div class="">
-    <a href="{{ route('posts.create') }}" class="btn btn-primary">Create</a>
-</div>
+
+
+
+
 
 @endsection
