@@ -58,7 +58,7 @@
 
 
     <div class="pagination">
-        {{ $posts->links() }}
+        {{ $posts->withQueryString()->links() }}
     </div>
 </div>
 
