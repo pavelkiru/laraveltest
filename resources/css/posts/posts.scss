@@ -1,9 +1,12 @@
 .posts {
+
+
     .create_button_wr {
         display: flex;
         justify-content: flex-end;
         margin-bottom: 40px;
     }
+
 
     .table {
         margin-bottom: 50px;
@@ -13,8 +16,20 @@
         }
     }
 
+
+
+
+
+
+
+
+
     .pagination {
         padding-bottom: 200px;
+
+
+
+
 
         .pagination_buttons_wr {
             display: flex;
@@ -22,22 +37,30 @@
             align-items: center;
             min-height: 120px;
 
+
+
+
+
             .pages {
                 min-height: 100px;
                 display: flex;
                 flex-direction: column;
-
                 .results {
+
 
                 }
 
+
                 .pagination_links {
+
+
 
                     .relative {
                         padding: 10px;
                         border: 1px solid lightgray;
                     }
                 }
+
 
             }
 
@@ -54,5 +77,6 @@
                 border: 1px solid gray;
             }
         }
+
     }
 }
