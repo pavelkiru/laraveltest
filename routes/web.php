@@ -4,6 +4,10 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\MainController;
+
+
+
+
 use App\Http\Controllers\Post\CreateController;
 use App\Http\Controllers\Post\DestroyController;
 use App\Http\Controllers\Post\EditController;
@@ -32,13 +36,54 @@ Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.in
 
 
 
-Route::prefix('admin')->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+
+Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
+
+    Route::get('/', [AdminController::class, 'index'])->name('admin.default');
+
+
+
+
+
+
+    Route::group(['namespace' => 'Post'], function () {
+
+          Route::get('/posts', 'IndexController')->name('admin.post.index');
+
+
+    });
 });
 
 
 
-//Route::group(['namespace' => 'Post'],function () { dont work
+
+
+
+//Route::namespace('Admin')->group(function () {
+//    Route::prefix('admin')->group(function () {
+//        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+//
+//
+//       // Route::get('/posts', sdfg::class)->name('admin.post.index');
+//        Route::namespace('Post')->group(function () {
+//
+////            Route::get('/posts', function () {
+////                return 'fffff';
+////            });
+//        Route::get('/posts', 'sdfg')->name('admin.post.index');
+//        });
+//
+//    });
+//});
+
+
+
+
+
+
+
+
+
 Route::prefix('posts')->group(function () {
     Route::get('/', IndexController::class)->name('posts.index');
     Route::get('/create', CreateController::class)->name('posts.create');
@@ -48,10 +93,6 @@ Route::prefix('posts')->group(function () {
     Route::patch('/{post}', UpdateController::class)->name('posts.update');
     Route::delete('/{post}', DestroyController::class)->name('posts.delete');
 });
-
-
-
-
 
 
 Route::get('/posts/firstorcreate', [PostController::class, 'firstOrCreate']);

@@ -1,5 +1,7 @@
 .posts {
+    padding-top: 20px;
 
+    background: red;
 
     .create_button_wr {
         display: flex;
@@ -17,18 +19,8 @@
     }
 
 
-
-
-
-
-
-
-
     .pagination {
         padding-bottom: 200px;
-
-
-
 
 
         .pagination_buttons_wr {
@@ -38,13 +30,11 @@
             min-height: 120px;
 
 
-
-
-
             .pages {
                 min-height: 100px;
                 display: flex;
                 flex-direction: column;
+
                 .results {
 
 
@@ -52,7 +42,6 @@
 
 
                 .pagination_links {
-
 
 
                     .relative {
