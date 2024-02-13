@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Post\IndexController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,31 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth',
+    'namespace' => 'App\Http\Controllers',
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+
+});
+//
+//Route::group(['namespace' => 'Post', 'middleware' => 'jwt.auth'], function () {
+//    Route::get('/posts', 'IndexController');
+//});
+
+
+
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::prefix('posts')->group(function () {
+        Route::get('/', IndexController::class);
+    });
 });
