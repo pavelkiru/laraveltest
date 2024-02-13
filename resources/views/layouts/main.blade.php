@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Website</title>
-{{--    <link rel="stylesheet" href="./style.css">--}}
+    {{--    <link rel="stylesheet" href="./style.css">--}}
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href=" {{ asset('css/app.css') }} ">
     <script src="{{ asset('js/app.js') }}"></script>
@@ -15,7 +15,8 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
             <a class="navbar-brand" href="#">Панель навигации</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Переключатель навигации">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Переключатель навигации">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -32,6 +33,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('posts.index') }}">posts</a>
                     </li>
+
+                    @can('view', auth()->user())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.post.index') }}">Admin</a>
+                        </li>
+                    @endcan
                 </ul>
             </div>
         </div>
