@@ -3,40 +3,25 @@
 namespace App\Http\Controllers\Post;
 
 use App\Http\Requests\Post\StoreRequest;
+use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
 
-//class StoreController extends BaseControllers {
-//
-//    public function __invoke(StoreRequest $request){
-//
-//        $data = $request->validate();
-//
-//        $this->service->store($data);
-//
-//        return redirect()->route('posts.index');
-//
-//    }
-//
-//}
+//        $data = $request->validated(); !!!!
+
 
 
 class StoreController extends BaseControllers {
-    public function __invoke(){
-        $data = request()->validate([
-            'title' => 'string',
-            'content' => 'string',
-            'image' => 'string',
-            'category_id' => '',
-            'tags' => '',
-            'likes' => 'integer',
-        ]);
 
-        $tags = $data['tags'];
-        unset($data['tags']);
+    public function __invoke(StoreRequest $request){
 
-        $post = Post::create($data);
-        $post->tags()->attach($tags);
+        $data = $request->validated();
 
-        return redirect()->route('posts.index');
+        $post = $this->service->store($data);
+
+        return new PostResource($post);
+
+       // return redirect()->route('posts.index');
+
     }
+
 }

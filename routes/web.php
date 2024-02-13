@@ -53,15 +53,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 
         Route::post('/', 'StoreController')->name('admin.post.store');
         Route::get('/', 'IndexController')->name('admin.post.index');
         Route::get('/{post}', 'ShowController')->name('admin.post.show');
-
-
-
-
-
-
         Route::patch('/{post}', 'UpdateController')->name('admin.post.update');
-       Route::delete('/{post}', 'DestroyController')->name('admin.post.delete');
-
+        Route::delete('/{post}', 'DestroyController')->name('admin.post.delete');
         Route::get('/{post}/edit', 'EditController')->name('admin.post.edit');
     });
 
