@@ -2,8 +2,15 @@
 @section('main_content')
 
     <div class="posts">
-        <div class="create_button_wr">
-            <a href="{{ route('posts.create') }}" class="btn btn-primary">Create new post</a>
+        <div class="title_button_wr">
+            <div>
+                <h1>Posts</h1>
+            </div>
+
+            <div>
+                <a href="{{ route('admin.post.create') }}" class="btn btn-primary">Create new post</a>
+            </div>
+
         </div>
         <table class="table">
             <thead>
@@ -37,11 +44,11 @@
                     <td>{{ $post->likes }}</td>
                     <td>
                         <div class="d-flex">
-                            <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary me-1">Show</a>
-                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary me-1">Edit</a>
+                            <a href="{{ route('admin.post.show', $post->id) }}" class="btn btn-primary me-1">Show</a>
+                            <a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-primary me-1">Edit</a>
 
 
-                            <form action="{{ route('posts.delete', $post->id)}}" method="post">
+                            <form action="{{ route('admin.post.delete', $post->id)}}" method="post">
                                 @method('delete')
                                 @csrf
                                 <button class="btn btn-danger" type="submit">Delete</button>

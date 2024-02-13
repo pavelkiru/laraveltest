@@ -39,44 +39,33 @@ Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.in
 
 Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
 
-    Route::get('/', [AdminController::class, 'index'])->name('admin.default');
+    Route::get('/', 'AdminController')->name('admin.default');
 
 
 
 
 
 
-    Route::group(['namespace' => 'Post'], function () {
+    Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
 
-          Route::get('/posts', 'IndexController')->name('admin.post.index');
+        Route::get('/create', 'CreateController')->name('admin.post.create');
+        Route::post('/', 'StoreController')->name('admin.post.store');
+        Route::get('/', 'IndexController')->name('admin.post.index');
+        Route::get('/{post}', 'ShowController')->name('admin.post.show');
 
 
+
+
+
+
+        Route::patch('/{post}', 'UpdateController')->name('admin.post.update');
+       Route::delete('/{post}', 'DestroyController')->name('admin.post.delete');
+
+        Route::get('/{post}/edit', 'EditController')->name('admin.post.edit');
     });
+
+
 });
-
-
-
-
-
-
-//Route::namespace('Admin')->group(function () {
-//    Route::prefix('admin')->group(function () {
-//        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-//
-//
-//       // Route::get('/posts', sdfg::class)->name('admin.post.index');
-//        Route::namespace('Post')->group(function () {
-//
-////            Route::get('/posts', function () {
-////                return 'fffff';
-////            });
-//        Route::get('/posts', 'sdfg')->name('admin.post.index');
-//        });
-//
-//    });
-//});
-
-
 
 
 

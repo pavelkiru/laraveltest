@@ -1,7 +1,9 @@
 .posts {
-    .create_button_wr {
+    padding-top: 20px;
+
+    .title_button_wr {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         margin-bottom: 40px;
     }
 

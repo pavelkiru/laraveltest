@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\Admin\Post;
 
+use App\Http\Controllers\Post\BaseControllers;
 use App\Http\Requests\Post\StoreRequest;
 use App\Models\Post;
 
@@ -13,13 +14,11 @@ use App\Models\Post;
 //
 //        $this->service->store($data);
 //
-//        return redirect()->route('posts.index');
+//        return redirect()->route('admin.post.index');
 //
 //    }
 //
 //}
-
-
 class StoreController extends BaseControllers {
     public function __invoke(){
         $data = request()->validate([
@@ -37,6 +36,6 @@ class StoreController extends BaseControllers {
         $post = Post::create($data);
         $post->tags()->attach($tags);
 
-        return redirect()->route('posts.index');
+        return redirect()->route('admin.post.index');
     }
 }
