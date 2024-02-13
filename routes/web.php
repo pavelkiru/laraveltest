@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 
 
@@ -29,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MainController::class, 'index'])->name('main.index');
+Route::get('/', [HomeController::class, 'index'])->name('main.index');
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.index');
 
@@ -37,7 +38,7 @@ Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.in
 
 
 
-Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
+Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => 'admin'], function () {
 
     Route::get('/', 'AdminController')->name('admin.default');
 
@@ -91,3 +92,7 @@ Route::get('/posts/updateorcreate', [PostController::class, 'updateOrCreate']);
 
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
