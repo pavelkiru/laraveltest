@@ -12,10 +12,13 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\Post\CreateController;
 use App\Http\Controllers\Post\DestroyController;
 use App\Http\Controllers\Post\EditController;
+use App\Http\Controllers\Post\ExportController;
 use App\Http\Controllers\Post\IndexController;
 use App\Http\Controllers\Post\ShowController;
 use App\Http\Controllers\Post\StoreController;
 use App\Http\Controllers\Post\UpdateController;
+
+use App\Http\Controllers\Post\UserExportController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +49,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 
 
     Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
 
+        Route::get('/import', 'ShowImportController')->name('admin.post.import');
+        Route::post('/import', 'ImportController')->name('admin.post.import_data');
+        Route::get('/export', 'ExportController')->name('admin.posts.export');
+
         Route::get('/create', 'CreateController')->name('admin.post.create');
         Route::post('/', 'StoreController')->name('admin.post.store');
         Route::get('/', 'IndexController')->name('admin.post.index');
@@ -62,9 +69,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 
 
 
 
-
-
 Route::prefix('posts')->group(function () {
+
     Route::get('/', IndexController::class)->name('posts.index');
     Route::get('/create', CreateController::class)->name('posts.create');
     Route::post('/', StoreController::class)->name('posts.store');
@@ -72,11 +78,12 @@ Route::prefix('posts')->group(function () {
     Route::get('/{post}/edit', EditController::class)->name('posts.edit');
     Route::patch('/{post}', UpdateController::class)->name('posts.update');
     Route::delete('/{post}', DestroyController::class)->name('posts.delete');
+
 });
 
 
-Route::get('/posts/firstorcreate', [PostController::class, 'firstOrCreate']);
-Route::get('/posts/updateorcreate', [PostController::class, 'updateOrCreate']);
+//Route::get('/posts/firstorcreate', [PostController::class, 'firstOrCreate']);
+//Route::get('/posts/updateorcreate', [PostController::class, 'updateOrCreate']);
 
 
 

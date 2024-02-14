@@ -8,6 +8,8 @@
             </div>
 
             <div>
+                <a href="{{ route('admin.posts.export') }}" class="btn btn-primary">Export all posts</a>
+                <a href="{{ route('admin.post.import') }}" class="btn btn-primary">Import posts</a>
                 <a href="{{ route('admin.post.create') }}" class="btn btn-primary">Create new post</a>
             </div>
 
