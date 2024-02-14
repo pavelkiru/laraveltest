@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Post\IndexController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,15 +32,49 @@ Route::group([
     Route::post('me', 'AuthController@me');
 
 });
-//
-//Route::group(['namespace' => 'Post', 'middleware' => 'jwt.auth'], function () {
-//    Route::get('/posts', 'IndexController');
-//});
+
+Route::group(['namespace' => 'App\Http\Controllers\Post', 'middleware' => 'jwt.auth'], function () {
 
 
-
-Route::group(['middleware' => 'jwt.auth'], function () {
     Route::prefix('posts')->group(function () {
-        Route::get('/', IndexController::class);
+        Route::get('/', 'IndexController');
+        Route::get('/', 'IndexController');
+        Route::get('/', 'IndexController');
+        Route::get('/', 'IndexController');
+        Route::get('/', 'IndexController');
+
+
+
+        Route::get('/', 'IndexController');
+        Route::get('/create', 'CreateController');
+        Route::post('/', 'StoreController');
+        Route::get('/{post}', 'ShowController');
+        Route::get('/{post}/edit', 'EditController');
+        Route::patch('/{post}', 'UpdateController');
+        Route::delete('/{post}', 'DestroyController');
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
